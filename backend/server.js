@@ -4,6 +4,7 @@ const cors = require('cors');
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const quizRoutes = require('./routes/quiz');
 
 // Initialize Express app
 const app = express();
@@ -14,6 +15,8 @@ app.use(cors()); // allows mobile app to talk to this server
 
 // Tell the server to use these routes
 app.use('/api/auth', authRoutes)
+app.use('/api/quizzes', quizRoutes);
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://hubtw:2002@quizgame.fgjoqhp.mongodb.net/?appName=QuizGame')
