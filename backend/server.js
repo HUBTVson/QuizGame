@@ -5,6 +5,7 @@ const cors = require('cors');
 // Import routes
 const authRoutes = require('./routes/auth');
 const quizRoutes = require('./routes/quiz');
+const scoreRoutes = require('./routes/score');
 
 // Initialize Express app
 const app = express();
@@ -14,8 +15,9 @@ app.use(express.json());
 app.use(cors()); // allows mobile app to talk to this server
 
 // Tell the server to use these routes
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/api/scores', scoreRoutes);
 
 
 // Connect to MongoDB

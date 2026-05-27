@@ -25,9 +25,44 @@ exports.registerUser = async (req, res) => {
 
         await newUser.save();
 
-        res.status(201).json({message: 'User registered successfully.'});
+        res.status(201).json({message: 'User registered successfully.', userId: newUser._id, username: newUser.username});
 
     }catch (error) {
         res.status(500).json({message: 'Server error'});
+    }
+};
+
+// Login existing user
+exports.loginUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+
+        // Check if user exists
+        const user = await User.findOne({email});
+        if (!user) {
+            return res.status(400).json({message: 'Invalid email or password'});
+        }
+
+        // Compare password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({message: 'Invalid email or password'});
+        }
+
+        res.status(200).json({message: 'Login successful', username: user.username, userId: user._id});
+
+    } catch (error) {
+        res.status(500).json({message: 'Server error'});
+    }
+};
+
+// Delete user by id
+exports.deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        res.status(200).json({ message: 'User deleted' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
     }
 };

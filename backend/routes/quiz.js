@@ -8,4 +8,7 @@ router.get('/', quizController.getAllQuizzes);
 // POST http://localhost:5000/api/quizzes
 router.post('/', quizController.createQuiz);
 
+// PUT http://localhost:5000/api/quizzes/:id
+router.put('/:id', quizController.updateQuiz);
+
 module.exports = router;
