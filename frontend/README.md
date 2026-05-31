@@ -30,16 +30,16 @@ University project — a full-stack quiz application built with React Native (Ex
 
 ### Backend
 
-cd backend
-npm install
-node server.js
++ cd backend
++ npm install
++ node server.js
 
 Server runs on `http://localhost:5000`.
 
 ### Frontend
 
-cd frontend
-npm install
-npx expo start
++ cd frontend
++ npm install
++ npx expo start
 
 Open in browser with `w`, or scan the QR code with Expo Go.
