@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 
-// When a POST request '/register', run the registration function
+// POST http://localhost:5000/api/auth/register
 router.post('/register', authController.registerUser);
 
-// When a POST request '/login', run the login function
+// POST http://localhost:5000/api/auth/login
 router.post('/login', authController.loginUser);
 
 // DELETE http://localhost:5000/api/auth/:id

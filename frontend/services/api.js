@@ -84,18 +84,21 @@ export const getUserLocation = async () => {
         accuracy: Location.Accuracy.Balanced
     });
 
-    // change coordinates for city names (reverse geocoding)
-    const [place] = await Location.reverseGeocodeAsync({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-    });
+    // change coordinates for city names (reverse geocoding via BigDataCloud)
+    const { latitude, longitude } = location.coords;
+    const geoRes = await fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+    );
+    const geoData = await geoRes.json();
+    const city = geoData.city || geoData.locality || geoData.principalSubdivision;
+    const country = geoData.countryName;
 
     return {
-        city: place.city || place.subregion || place.region,
-        country: place.country,
-        display: `${place.city || place.region}, ${place.country}`,
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        city,
+        country,
+        display: `${city}, ${country}`,
+        latitude,
+        longitude,
     };
 };
 
