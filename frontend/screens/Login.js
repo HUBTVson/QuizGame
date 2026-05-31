@@ -13,6 +13,10 @@ export default function RegisterScreen({ navigation }) {
             Alert.alert("Error", "All fields are required!");
             return;
         }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            Alert.alert("Error", "Enter a valid email address.");
+            return;
+        }
         if (password.length < 8) {
             Alert.alert("Error", "Password must be at least 8 characters.");
             return;
@@ -34,6 +38,10 @@ export default function RegisterScreen({ navigation }) {
     const handleLogin = async () => {
         if (!email || !password) {
             Alert.alert("Error", "Email and password are required!");
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            Alert.alert("Error", "Enter a valid email address.");
             return;
         }
         try {
